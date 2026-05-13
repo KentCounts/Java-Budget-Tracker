@@ -21,6 +21,13 @@ package com.mycompany.javabudgettracker;
 // Utils / Currency convert, Date, Validation
 
 public class JavaBudgetTracker {
+    
+    public static void main(String[] args) {
+
+    System.out.println("Java Budget Tracker");
+
+}
+    
     // main():
     //     initialize
     //     initialize storage
