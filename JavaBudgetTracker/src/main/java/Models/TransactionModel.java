@@ -9,8 +9,8 @@ package Models;
  * @author Kent
  */
 
-// LocalDate
-// TransactionType enum TODO: Build
+import Java.time.LocalDate;
+import Enums.TransactionType;
 
 public class TransactionModel {
 
