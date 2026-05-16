@@ -10,30 +10,41 @@ package Models;
  */
 
 import java.time.LocalDate;
+
 import Enums.TransactionType;
 
-public class TransactionModel {
-    // unique transaction id
+public class Transaction {
+
     private int id;
-
     private double amount;
-
-    // category name IE Food, Rent, Entertainment. 
     private String category;
-
-    // transaction description/notes
     private String description;
-
     private LocalDate date;
-
-    // transaction type
-    // INCOME or EXPENSE
     private TransactionType type;
 
+
     // CONSTRUCTORS
-    // default constructor
-    // full constructor
-    // initialize all fields
+    public Transaction() {
+
+    }
+
+    public Transaction(
+            int id,
+            double amount,
+            String category,
+            String description,
+            LocalDate date,
+            TransactionType type
+    ) {
+
+        this.id = id;
+        this.amount = amount;
+        this.category = category;
+        this.description = description;
+        this.date = date;
+        this.type = type;
+    }
+}
 
     // GETTERS
     // get id
