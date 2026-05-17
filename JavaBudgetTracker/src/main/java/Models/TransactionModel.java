@@ -44,15 +44,42 @@ public class Transaction {
         this.date = date;
         this.type = type;
     }
-}
 
     // GETTERS
     // get id
+    public int getId() {
+        return id;
+    }
+
+
     // get amount
+    public double getAmount() {
+        return amount;
+    }
+
+
     // get category
+    public String getCategory() {
+        return category;
+    }
+
+
     // get description
+    public String getDescription() {
+        return description;
+    }
+
+
     // get date
+    public LocalDate getDate() {
+        return date;
+    }
+
+
     // get transaction type
+    public TransactionType getType() {
+        return type;
+    }
 
     // SETTERS
     // set id
