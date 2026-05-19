@@ -81,13 +81,37 @@ public class Transaction {
         return type;
     }
 
-    // SETTERS
-    // set id
-    // set amount
-    // set category
-    // set description
-    // set date
-    // set transaction type
+// SETTERS
+// set id
+public void setId(int id) {
+    this.id = id;
+}
+
+
+// set amount
+public void setAmount(double amount) {
+    this.amount = amount;
+}
+
+// set category
+public void setCategory(String category) {
+    this.category = category;
+}
+
+// set description
+public void setDescription(String description) {
+    this.description = description;
+}
+
+// set date
+public void setDate(LocalDate date) {
+    this.date = date;
+}
+
+// set type
+public void setType(TransactionType type) {
+    this.type = type;
+}
 
     // OUTPUT
     // function: toString()
