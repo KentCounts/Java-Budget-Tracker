@@ -113,9 +113,20 @@ public void setType(TransactionType type) {
     this.type = type;
 }
 
-    // OUTPUT
-    // function: toString()
-    // return formatted transaction string
+// OUTPUT
+// return formatted transaction string
+@Override
+public String toString() {
+
+    return "Transaction { " +
+            "id=" + id +
+            ", amount=" + amount +
+            ", category='" + category + '\'' +
+            ", description='" + description + '\'' +
+            ", date=" + date +
+            ", type=" + type +
+            " }";
+}
 
     // FUTURE IMPROVEMENTS
     // tags/labels
