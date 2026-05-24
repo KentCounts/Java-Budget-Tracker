@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 import Enums.TransactionType;
 
-public class Transaction {
+public class TransactionModel {
 
     private int id;
     private double amount;
@@ -24,11 +24,11 @@ public class Transaction {
 
 
     // CONSTRUCTORS
-    public Transaction() {
+    public TransactionModel() {
 
     }
 
-    public Transaction(
+    public TransactionModel(
             int id,
             double amount,
             String category,
