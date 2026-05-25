@@ -10,19 +10,25 @@ package Models;
  */
 
 // IMPORTS
-// LocalDate for using date range
-
+import java.time.LocalDate;
 
 public class BudgetModel {
 
-    // FIELDS
-    // unique budget id
-    // budget name
-    // budget category
-    // budget limit / maximum amount
-    // amount currently spent
-    // start date
-    // end date
+// FIELDS
+// unique budget id
+private int id;
+// budget name
+private String name;
+// budget category
+private String category;
+// budget limit / maximum amount
+private double limitAmount;
+// amount currently spent
+private double spentAmount;
+// start date
+private LocalDate startDate;
+// end date
+private LocalDate endDate;
 
 
     // CONSTRUCTORS
