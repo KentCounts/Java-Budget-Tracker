@@ -14,27 +14,50 @@ import java.time.LocalDate;
 
 public class BudgetModel {
 
-// FIELDS
-// unique budget id
-private int id;
-// budget name
-private String name;
-// budget category
-private String category;
-// budget limit / maximum amount
-private double limitAmount;
-// amount currently spent
-private double spentAmount;
-// start date
-private LocalDate startDate;
-// end date
-private LocalDate endDate;
+    // FIELDS
+    // unique budget id
+    private int id;
+    // budget name
+    private String name;
+    // budget category
+    private String category;
+    // budget limit / maximum amount
+    private double limitAmount;
+    // amount currently spent
+    private double spentAmount;
+    // start date
+    private LocalDate startDate;
+    // end date
+    private LocalDate endDate;
 
 
     // CONSTRUCTORS
     // default constructor
-    // full constuctor
+    public BudgetModel() {
+
+    }
+
+
+    // full constructor
     // initialize all fields
+    public BudgetModel(
+            int id,
+            String name,
+            String category,
+            double limitAmount,
+            double spentAmount,
+            LocalDate startDate,
+            LocalDate endDate
+    ) {
+
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.limitAmount = limitAmount;
+        this.spentAmount = spentAmount;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     // GETTERS
     // get id
