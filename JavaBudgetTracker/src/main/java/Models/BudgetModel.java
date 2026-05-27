@@ -59,15 +59,41 @@ public class BudgetModel {
         this.endDate = endDate;
     }
 
-    // GETTERS
-    // get id
-    // get name
-    // get category
-    // get limit amount
-    // get spent amount
-    // get start date
-    // get end dte
+// GETTERS
+// get id
+public int getId() {
+    return id;
+}
 
+// get name
+public String getName() {
+    return name;
+}
+
+// get category
+public String getCategory() {
+    return category;
+}
+
+// get limit amount
+public double getLimitAmount() {
+    return limitAmount;
+}
+
+// get spent amount
+public double getSpentAmount() {
+    return spentAmount;
+}
+
+// get start date
+public LocalDate getStartDate() {
+    return startDate;
+}
+
+// get end date
+public LocalDate getEndDate() {
+    return endDate;
+}
     // SETTERS
     // set id
     // set name
