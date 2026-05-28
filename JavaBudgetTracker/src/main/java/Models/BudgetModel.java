@@ -95,13 +95,47 @@ public LocalDate getEndDate() {
     return endDate;
 }
     // SETTERS
-    // set id
-    // set name
-    // set category
-    // set limit amount
-    // set spent amount
-    // set start date
-    // set end date
+
+// set id
+public void setId(int id) {
+    this.id = id;
+}
+
+
+// set name
+public void setName(String name) {
+    this.name = name;
+}
+
+
+// set category
+public void setCategory(String category) {
+    this.category = category;
+}
+
+
+// set limit amount
+public void setLimitAmount(double limitAmount) {
+    this.limitAmount = limitAmount;
+}
+
+
+// set spent amount
+public void setSpentAmount(double spentAmount) {
+    this.spentAmount = spentAmount;
+}
+
+
+// set start date
+public void setStartDate(LocalDate startDate) {
+    this.startDate = startDate;
+}
+
+
+// set end date
+public void setEndDate(LocalDate endDate) {
+    this.endDate = endDate;
+}
 
 
     // BUDGET LOGIC
