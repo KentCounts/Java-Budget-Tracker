@@ -170,7 +170,7 @@ public double getPercentUsed() {
     return (spentAmount / limitAmount) * 100;
 }
 
-// OUTPUT
+// OUTPUT to string
 @Override
 public String toString() {
 
