@@ -138,15 +138,52 @@ public void setEndDate(LocalDate endDate) {
 }
 
 
-    // BUDGET LOGIC
-    // addSpending(amount)
-    // getRemainingAmount()
+// BUDGET LOGIC
+// addSpending(amount)
+public void addSpending(double amount) {
 
-    // isOverBudget()
-    // getPercentUsed()
+    spentAmount += amount;
+}
 
-    // OUTPUT
-    // toString()
+
+// getRemainingAmount()
+public double getRemainingAmount() {
+
+    return limitAmount - spentAmount;
+}
+
+
+// isOverBudget()
+public boolean isOverBudget() {
+
+    return spentAmount > limitAmount;
+}
+
+
+// getPercentUsed()
+public double getPercentUsed() {
+
+    if (limitAmount == 0) {
+        return 0;
+    }
+
+    return (spentAmount / limitAmount) * 100;
+}
+
+// OUTPUT
+@Override
+public String toString() {
+
+    return "BudgetModel { " +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", category='" + category + '\'' +
+            ", limitAmount=" + limitAmount +
+            ", spentAmount=" + spentAmount +
+            ", startDate=" + startDate +
+            ", endDate=" + endDate +
+            " }";
+}
 
 
     // FUTURE IMPROVEMENTS
