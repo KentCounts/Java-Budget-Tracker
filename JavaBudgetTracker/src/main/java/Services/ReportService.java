@@ -6,8 +6,13 @@ package Services;
 
 // IMPORTS
 // model imports
-// ArrayList
-// collections utilities
+import Models.BudgetModel;
+import Models.TransactionModel;
+// enums?
+import Enums.TransactionType;
+// utilities
+import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 /**
@@ -18,12 +23,26 @@ public class ReportService {
 
     // FIELDS
     // reference to transaction service
-    // cached report data (optional)
+    private TransactionService transactionService;
+    // list of budgets
+    private ArrayList<BudgetModel> budgets;
+    // cached report data ??
 
 
     // CONSTRUCTORS
     // default constructor
+    public ReportService() {
+
+        budgets = new ArrayList<>();
+    }
+
     // constructor with transaction service dependency
+    public ReportService(TransactionService transactionService) {
+
+        this.transactionService = transactionService;
+
+        budgets = new ArrayList<>();
+    }
 
 
     // REPORT GENERATION
