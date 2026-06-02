@@ -19,7 +19,7 @@ public class TransactionService {
 
     // FIELDS
     // list of all transactions
-    private ArrayList<Transaction> transactions;
+    private ArrayList<TransactionModel> transactions;
 
     // CONSTRUCTORS
     // default constructor
@@ -27,10 +27,53 @@ public class TransactionService {
         transactions = new ArrayList<>();
     }
 
-    // CORE
-    // add transaction
-    // remove transaction by id
-    // get all transactions
-    // find transaction by id
-    // clear all transactions
+// CORE
+// add transaction
+public void addTransaction(TransactionModel transaction) {
+
+    transactions.add(transaction);
+}
+
+// remove transaction by id
+public boolean removeTransactionById(int id) {
+
+    for (TransactionModel transaction : transactions) {
+
+        if (transaction.getId() == id) {
+
+            transactions.remove(transaction);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// get all transactions
+public ArrayList<TransactionModel> getTransactions() {
+
+    return transactions;
+}
+
+// find transaction by id
+public TransactionModel findTransactionById(int id) {
+
+    for (TransactionModel transaction : transactions) {
+
+        if (transaction.getId() == id) {
+
+            return transaction;
+        }
+    }
+
+    return null;
+}
+
+// clear all transactions
+public void clearTransactions() {
+
+    transactions.clear();
+}
+
 }
