@@ -23,13 +23,32 @@ public class ReportService {
 
     // FIELDS
     // reference to transaction service
-    // list of budgets
-    // cached report data ??
+    private TransactionService transactionService;
 
+    // list of budgets
+    private ArrayList<BudgetModel> budgets;
+
+    // cached report data
+    // optional
+    // private String lastGeneratedReport;
 
     // CONSTRUCTORS
     // default constructor
+    public ReportService() {
+
+        transactionService = new TransactionService();
+
+        budgets = new ArrayList<>();
+    }
+
+
     // constructor with transaction service dependency
+    public ReportService(TransactionService transactionService) {
+
+        this.transactionService = transactionService;
+
+        budgets = new ArrayList<>();
+    }
 
 
 
