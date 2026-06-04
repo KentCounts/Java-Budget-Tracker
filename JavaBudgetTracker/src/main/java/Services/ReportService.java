@@ -55,10 +55,53 @@ public class ReportService {
     // REPORT GENERATION
     // generate income report
     // calculate total income
+    public double generateIncomeReport() {
+
+        double totalIncome = 0;
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getType() == TransactionType.INCOME) {
+
+                totalIncome += transaction.getAmount();
+            }
+        }
+
+        return totalIncome;
+    }
+
+
     // generate expense report
-    // calculatetotal expenses
+    // calculate total expenses
+    public double generateExpenseReport() {
+
+        double totalExpenses = 0;
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getType() == TransactionType.EXPENSE) {
+
+                totalExpenses += transaction.getAmount();
+            }
+        }
+
+        return totalExpenses;
+    }
+
+
     // generate balance report
     // income - expenses
+    public double generateBalanceReport() {
+
+        return generateIncomeReport() - generateExpenseReport();
+    }
+    
     // generate category summary
     // totals grouped by category
     // generate monthly report
