@@ -13,6 +13,7 @@ import Enums.TransactionType;
 // utilities
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 
 /**
@@ -104,10 +105,71 @@ public class ReportService {
     
     // generate category summary
     // totals grouped by category
+    public HashMap<String, Double> generateCategorySummary() {
+
+        HashMap<String, Double> categoryTotals = new HashMap<>();
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            String category = transaction.getCategory();
+            double amount = transaction.getAmount();
+
+            if (transaction.getType() == TransactionType.EXPENSE) {
+
+                categoryTotals.put(
+                        category,
+                        categoryTotals.getOrDefault(category, 0.0) + amount
+                );
+            }
+        }
+
+        return categoryTotals;
+    }
+
+
     // generate monthly report
     // transactions filtered by month/year
+    public ArrayList<TransactionModel> generateMonthlyReport(int month, int year) {
+
+        ArrayList<TransactionModel> monthlyTransactions = new ArrayList<>();
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getDate().getMonthValue() == month
+                    && transaction.getDate().getYear() == year) {
+
+                monthlyTransactions.add(transaction);
+            }
+        }
+
+        return monthlyTransactions;
+    }
+
+
     // generate budget usage report
     // compare spending against budget limits
+    public HashMap<String, Double> generateBudgetUsageReport() {
+
+        HashMap<String, Double> budgetUsage = new HashMap<>();
+
+        HashMap<String, Double> categoryTotals = generateCategorySummary();
+
+        for (BudgetModel budget : budgets) {
+
+            String category = budget.getCategory();
+            double spent = categoryTotals.getOrDefault(category, 0.0);
+
+            budgetUsage.put(category, spent);
+        }
+
+        return budgetUsage;
+    }
 
 
     // SEARCH
