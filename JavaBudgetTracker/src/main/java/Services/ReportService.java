@@ -174,10 +174,90 @@ public class ReportService {
 
     // SEARCH
     // get transactions by category
+    public ArrayList<TransactionModel> getTransactionsByCategory(String category) {
+
+        ArrayList<TransactionModel> results = new ArrayList<>();
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getCategory().equalsIgnoreCase(category)) {
+
+                results.add(transaction);
+            }
+        }
+
+        return results;
+    }
+
+
     // get transactions by type
     // INCOME or EXPENSE
+    public ArrayList<TransactionModel> getTransactionsByType(TransactionType type) {
+
+        ArrayList<TransactionModel> results = new ArrayList<>();
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getType() == type) {
+
+                results.add(transaction);
+            }
+        }
+
+        return results;
+    }
+
+
     // get transactions between dates
+    public ArrayList<TransactionModel> getTransactionsBetweenDates(
+            LocalDate startDate,
+            LocalDate endDate
+    ) {
+
+        ArrayList<TransactionModel> results = new ArrayList<>();
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            LocalDate transactionDate = transaction.getDate();
+
+            if ((transactionDate.isEqual(startDate) || transactionDate.isAfter(startDate))
+                    && (transactionDate.isEqual(endDate) || transactionDate.isBefore(endDate))) {
+
+                results.add(transaction);
+            }
+        }
+
+        return results;
+    }
+
+
     // search transactions by description
+    public ArrayList<TransactionModel> searchTransactionsByDescription(String keyword) {
+
+        ArrayList<TransactionModel> results = new ArrayList<>();
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+
+                results.add(transaction);
+            }
+        }
+
+        return results;
+    }
 
 
     // STATISTICS
