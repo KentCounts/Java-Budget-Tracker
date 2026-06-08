@@ -369,8 +369,35 @@ public class ReportService {
 
     // DISPLAY
     // format report output
+    public String formatReportOutput() {
+
+        String report = "";
+
+        report += "=== Budget Report ===\n";
+        report += "Total Income: $" + generateIncomeReport() + "\n";
+        report += "Total Expenses: $" + generateExpenseReport() + "\n";
+        report += "Balance: $" + generateBalanceReport() + "\n";
+        report += "Average Income: $" + getAverageIncome() + "\n";
+        report += "Average Expense: $" + getAverageExpense() + "\n";
+        report += "Transaction Count: " + getTotalTransactionCount() + "\n";
+
+        return report;
+    }
+
+
     // print report summary
+    public void printReportSummary() {
+
+        System.out.println(formatReportOutput());
+    }
+
+
     // export report data (future)
+    public void exportReportData() {
+
+        // TODO:
+        // export report data to CSV, TXT, or PDF later
+    }
 
 
     // FUTURE IMPROVEMENTS
