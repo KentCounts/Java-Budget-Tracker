@@ -262,11 +262,110 @@ public class ReportService {
 
     // STATISTICS
     // get highest expense transaction
-    // get highest income transaction
-    // get average expense
-    // get average income
-    // get total transaction count
+    public TransactionModel getHighestExpenseTransaction() {
 
+        TransactionModel highestExpense = null;
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getType() == TransactionType.EXPENSE) {
+
+                if (highestExpense == null
+                        || transaction.getAmount() > highestExpense.getAmount()) {
+
+                    highestExpense = transaction;
+                }
+            }
+        }
+
+        return highestExpense;
+    }
+
+    // get highest income transaction
+    public TransactionModel getHighestIncomeTransaction() {
+
+        TransactionModel highestIncome = null;
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getType() == TransactionType.INCOME) {
+
+                if (highestIncome == null
+                        || transaction.getAmount() > highestIncome.getAmount()) {
+
+                    highestIncome = transaction;
+                }
+            }
+        }
+
+        return highestIncome;
+    }
+
+    // get average expense
+    public double getAverageExpense() {
+
+        double totalExpenses = 0;
+        int expenseCount = 0;
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getType() == TransactionType.EXPENSE) {
+
+                totalExpenses += transaction.getAmount();
+
+                expenseCount++;
+            }
+        }
+
+        if (expenseCount == 0) {
+
+            return 0;
+        }
+
+        return totalExpenses / expenseCount;
+    }
+
+    // get average income
+    public double getAverageIncome() {
+
+        double totalIncome = 0;
+        int incomeCount = 0;
+
+        ArrayList<TransactionModel> transactions =
+                transactionService.getTransactions();
+
+        for (TransactionModel transaction : transactions) {
+
+            if (transaction.getType() == TransactionType.INCOME) {
+
+                totalIncome += transaction.getAmount();
+
+                incomeCount++;
+            }
+        }
+
+        if (incomeCount == 0) {
+
+            return 0;
+        }
+
+        return totalIncome / incomeCount;
+    }
+
+    // get total transaction count
+    public int getTotalTransactionCount() {
+
+        return transactionService.getTransactions().size();
+    }
 
     // DISPLAY
     // format report output
