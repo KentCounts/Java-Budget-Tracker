@@ -11,21 +11,53 @@ package Storage;
 
 // IMPORTS
 // model imports
-// ArrayList
-// file reading/writing classes
-// LocalDate parsing if needed
+import Models.BudgetModel;
+import Models.TransactionModel;
+// collections
+import java.util.ArrayList;
+// file reading/writing
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+// date parsing
+import java.time.LocalDate;
+// enums
+import Enums.TransactionType;
 
 public class FileManager {
 
     // FIELDS
     // transaction data file path
+    private String transactionFilePath;
     // budget data file path
+    private String budgetFilePath;
     // delimiter for saved data
     // example: "," or "|"
+    private final String DELIMITER = "|";
+
     // CONSTRUCTORS
     // default constructor
     // set default file paths
+    public FileManager() {
+
+        transactionFilePath = "transactions.txt";
+
+        budgetFilePath = "budgets.txt";
+    }
+
     // constructor with custom file paths
+    public FileManager(
+            String transactionFilePath,
+            String budgetFilePath
+    ) {
+
+        this.transactionFilePath = transactionFilePath;
+
+        this.budgetFilePath = budgetFilePath;
+    }
 
     // TRANSACTION STORAGE
     // function: saveTransactions(transactions)
