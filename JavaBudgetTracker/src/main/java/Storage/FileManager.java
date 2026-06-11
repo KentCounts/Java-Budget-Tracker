@@ -106,12 +106,61 @@ public class FileManager {
     // return BudgetModel
 
     // FILE UTILITIES
-    // function: ensureDataFilesExist()
     // create data files if they do not exist
-    // function: clearTransactionFile()
+    public void ensureDataFilesExist() {
+
+        try {
+
+            File transactionFile = new File(transactionFilePath);
+            File budgetFile = new File(budgetFilePath);
+
+            if (!transactionFile.exists()) {
+                transactionFile.createNewFile();
+            }
+
+            if (!budgetFile.exists()) {
+                budgetFile.createNewFile();
+            }
+
+        } catch (IOException e) {
+
+            System.out.println("Error creating data files: " + e.getMessage());
+        }
+    }
+    
     // erase all transaction data
-    // function: clearBudgetFile()
+    public void clearTransactionFile() {
+
+        try {
+
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(transactionFilePath)
+            );
+
+            writer.close();
+
+        } catch (IOException e) {
+
+            System.out.println("Error clearing transaction file: " + e.getMessage());
+        }
+    }
+
     // erase all budget data
+    public void clearBudgetFile() {
+
+        try {
+
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(budgetFilePath)
+            );
+
+            writer.close();
+
+        } catch (IOException e) {
+
+            System.out.println("Error clearing budget file: " + e.getMessage());
+        }
+    }
 
     // FUTURE IMPROVEMENTS
     // CSV support
