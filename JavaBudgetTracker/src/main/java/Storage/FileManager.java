@@ -66,16 +66,47 @@ public class FileManager {
     // convert each transaction to file-safe string
     // write each transaction line to file
     // close file
+    public void saveTransactions(
+        ArrayList<TransactionModel> transactions
+) {
+
+    try {
+
+        BufferedWriter writer = new BufferedWriter(
+                new FileWriter(transactionFilePath)
+        );
+
+        for (TransactionModel transaction : transactions) {
+
+            writer.write(
+                    transactionToFileLine(transaction) // TO DO: MAKE
+            );
+
+            writer.newLine();
+        }
+
+        writer.close();
+
+    } catch (IOException e) {
+
+        System.out.println(
+                "Error saving transactions: "
+                + e.getMessage()
+        );
+    }
+}
     // function: loadTransactions()
     // open transaction file
     // read each line
     // convert each line into TransactionModel object
     // add transaction to list
     // return transaction list
+    
     // function: transactionToFileLine(transaction)
     // convert transaction object into delimited text
     // example:
     // id|amount|category|description|date|type
+    
     // function: fileLineToTransaction(line)
     // split line by delimiter
     // parse values
