@@ -106,6 +106,21 @@ public class FileManager {
     // convert transaction object into delimited text
     // example:
     // id|amount|category|description|date|type
+    private String transactionToFileLine(
+        TransactionModel transaction
+) {
+
+    return transaction.getId()
+            + DELIMITER
+            + transaction.getAmount()
+            + DELIMITER
+            + transaction.getCategory()
+            + DELIMITER
+            + transaction.getDescription()
+            + DELIMITER
+            + transaction.getDate()
+            + DELIMITER
+            + transaction.getType();
     
     // function: fileLineToTransaction(line)
     // split line by delimiter
