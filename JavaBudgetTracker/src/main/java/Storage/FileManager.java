@@ -121,12 +121,41 @@ public class FileManager {
             + transaction.getDate()
             + DELIMITER
             + transaction.getType();
+    }
     
     // function: fileLineToTransaction(line)
     // split line by delimiter
     // parse values
     // create TransactionModel
     // return TransactionModel
+    private TransactionModel fileLineToTransaction(
+        String line
+) {
+
+    String[] parts = line.split("\\|");
+
+    int id = Integer.parseInt(parts[0]);
+
+    double amount = Double.parseDouble(parts[1]);
+
+    String category = parts[2];
+
+    String description = parts[3];
+
+    LocalDate date = LocalDate.parse(parts[4]);
+
+    TransactionType type =
+            TransactionType.valueOf(parts[5]);
+
+    return new TransactionModel(
+            id,
+            amount,
+            category,
+            description,
+            date,
+            type
+    );
+}
 
     // BUDGET STORAGE
     // function: saveBudgets(budgets)
