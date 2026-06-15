@@ -101,6 +101,42 @@ public class FileManager {
     // convert each line into TransactionModel object
     // add transaction to list
     // return transaction list
+    public ArrayList<TransactionModel> loadTransactions() {
+
+    ArrayList<TransactionModel> transactions =
+            new ArrayList<>();
+
+    try {
+
+        BufferedReader reader = new BufferedReader(
+                new FileReader(transactionFilePath)
+        );
+
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+
+            if (!line.trim().isEmpty()) {
+
+                TransactionModel transaction =
+                        fileLineToTransaction(line);
+
+                transactions.add(transaction);
+            }
+        }
+
+        reader.close();
+
+    } catch (IOException e) {
+
+        System.out.println(
+                "Error loading transactions: "
+                + e.getMessage()
+        );
+    }
+
+    return transactions;
+}
     
     // function: transactionToFileLine(transaction)
     // convert transaction object into delimited text
