@@ -200,21 +200,76 @@ public class FileManager {
     // convert each budget to file-safe string
     // write each budget line to file
     // close file
+    
     // function: loadBudgets()
     // open budget file
     // read each line
     // convert each line into BudgetModel object
     // add budget to list
     // return budget list
+    
     // function: budgetToFileLine(budget)
     // convert budget object into delimited text
     // example:
     // id|name|category|limitAmount|spentAmount|startDate|endDate
+    private String budgetToFileLine(
+        BudgetModel budget
+) {
+
+    return budget.getId()
+            + DELIMITER
+            + budget.getName()
+            + DELIMITER
+            + budget.getCategory()
+            + DELIMITER
+            + budget.getLimitAmount()
+            + DELIMITER
+            + budget.getSpentAmount()
+            + DELIMITER
+            + budget.getStartDate()
+            + DELIMITER
+            + budget.getEndDate();
+}
+    
     // function: fileLineToBudget(line)
     // split line by delimiter
     // parse values
     // create BudgetModel
     // return BudgetModel
+    private BudgetModel fileLineToBudget(
+        String line
+) {
+
+    String[] parts = line.split("\\|");
+
+    int id = Integer.parseInt(parts[0]);
+
+    String name = parts[1];
+
+    String category = parts[2];
+
+    double limitAmount =
+            Double.parseDouble(parts[3]);
+
+    double spentAmount =
+            Double.parseDouble(parts[4]);
+
+    LocalDate startDate =
+            LocalDate.parse(parts[5]);
+
+    LocalDate endDate =
+            LocalDate.parse(parts[6]);
+
+    return new BudgetModel(
+            id,
+            name,
+            category,
+            limitAmount,
+            spentAmount,
+            startDate,
+            endDate
+    );
+}
 
     // FILE UTILITIES
     // create data files if they do not exist
