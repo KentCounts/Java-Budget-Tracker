@@ -200,13 +200,79 @@ public class FileManager {
     // convert each budget to file-safe string
     // write each budget line to file
     // close file
-    
+    public void saveBudgets(
+            ArrayList<BudgetModel> budgets
+    ) {
+
+        try {
+
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(budgetFilePath)
+            );
+
+            for (BudgetModel budget : budgets) {
+
+                writer.write(
+                        budgetToFileLine(budget)
+                );
+
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (IOException e) {
+
+            System.out.println(
+                    "Error saving budgets: "
+                    + e.getMessage()
+            );
+        }
+    }
+
+
     // function: loadBudgets()
     // open budget file
     // read each line
     // convert each line into BudgetModel object
     // add budget to list
     // return budget list
+    public ArrayList<BudgetModel> loadBudgets() {
+
+        ArrayList<BudgetModel> budgets =
+                new ArrayList<>();
+
+        try {
+
+            BufferedReader reader = new BufferedReader(
+                    new FileReader(budgetFilePath)
+            );
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                if (!line.trim().isEmpty()) {
+
+                    BudgetModel budget =
+                            fileLineToBudget(line);
+
+                    budgets.add(budget);
+                }
+            }
+
+            reader.close();
+
+        } catch (IOException e) {
+
+            System.out.println(
+                    "Error loading budgets: "
+                    + e.getMessage()
+            );
+        }
+
+        return budgets;
+    }
     
     // function: budgetToFileLine(budget)
     // convert budget object into delimited text
