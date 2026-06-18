@@ -10,4 +10,11 @@ package UI;
  */
 public class MainWindow {
     
+    // import swing GUI
+    // Main menu
+    // load / save / edit
+    // display info from file
+    // style buttons and color window etc. 
+    // assets necessary?
+    
 }
