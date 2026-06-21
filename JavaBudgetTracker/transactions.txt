@@ -1,0 +1,2 @@
+1|1500.0|Paycheck|Biweekly paycheck|2026-05-01|INCOME
+3|850.0|Rent|Monthly rent|2026-05-03|EXPENSE

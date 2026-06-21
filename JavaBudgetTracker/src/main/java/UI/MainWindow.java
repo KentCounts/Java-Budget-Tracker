@@ -8,13 +8,30 @@ package UI;
  *
  * @author Kent
  */
-public class MainWindow {
-    
-    // import swing GUI
-    // Main menu
-    // load / save / edit
-    // display info from file
-    // style buttons and color window etc. 
-    // assets necessary?
-    
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+
+public class MainWindow extends JFrame {
+
+    public MainWindow() {
+
+        setTitle("Java Budget Tracker");
+        setSize(900, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        JLabel placeholderLabel = new JLabel(
+                "Java Budget Tracker - GUI Shell",
+                SwingConstants.CENTER
+        );
+
+        mainPanel.add(placeholderLabel, BorderLayout.CENTER);
+
+        add(mainPanel);
+    }
 }
