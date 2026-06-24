@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
-public class MainWindow extends JFrame {
+ public class MainWindow extends JFrame {
 
     private JPanel contentPanel;
 
@@ -38,12 +38,7 @@ public class MainWindow extends JFrame {
 
         contentPanel = new JPanel(new BorderLayout());
 
-        JLabel welcomeLabel = new JLabel(
-                "Welcome to Java Budget Tracker",
-                SwingConstants.CENTER
-        );
-
-        contentPanel.add(welcomeLabel, BorderLayout.CENTER);
+        showPanel(new DashboardPanel());
 
         mainPanel.add(menuPanel, BorderLayout.WEST);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
@@ -62,11 +57,11 @@ public class MainWindow extends JFrame {
         JButton saveButton = new JButton("Save");
         JButton exitButton = new JButton("Exit");
 
-        dashboardButton.addActionListener(e -> showContent("Dashboard"));
-        transactionsButton.addActionListener(e -> showContent("Transactions"));
-        budgetsButton.addActionListener(e -> showContent("Budgets"));
-        reportsButton.addActionListener(e -> showContent("Reports"));
-        saveButton.addActionListener(e -> showContent("Save feature coming soon"));
+        dashboardButton.addActionListener(e -> showPanel(new DashboardPanel()));
+        transactionsButton.addActionListener(e -> showPanel(new TransactionPanel()));
+        budgetsButton.addActionListener(e -> showPanel(new BudgetPanel()));
+        reportsButton.addActionListener(e -> showPanel(new ReportPanel()));
+        saveButton.addActionListener(e -> System.out.println("Save feature coming soon."));
         exitButton.addActionListener(e -> System.exit(0));
 
         menuPanel.add(dashboardButton);
@@ -79,17 +74,10 @@ public class MainWindow extends JFrame {
         return menuPanel;
     }
 
-    private void showContent(String text) {
+    private void showPanel(JPanel panel) {
 
         contentPanel.removeAll();
-
-        JLabel label = new JLabel(
-                text,
-                SwingConstants.CENTER
-        );
-
-        contentPanel.add(label, BorderLayout.CENTER);
-
+        contentPanel.add(panel, BorderLayout.CENTER);
         contentPanel.revalidate();
         contentPanel.repaint();
     }
