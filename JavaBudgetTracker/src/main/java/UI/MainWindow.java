@@ -16,12 +16,18 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import Services.TransactionService;
+
+
  public class MainWindow extends JFrame {
 
     private JPanel contentPanel;
+    
+    private TransactionService transactionService;
 
-    public MainWindow() {
+    public MainWindow(TransactionService transactionService) {
 
+        this.transactionService = transactionService;
         setTitle("Java Budget Tracker");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +64,11 @@ import java.awt.GridLayout;
         JButton exitButton = new JButton("Exit");
 
         dashboardButton.addActionListener(e -> showPanel(new DashboardPanel()));
-        transactionsButton.addActionListener(e -> showPanel(new TransactionPanel()));
+        
+        transactionsButton.addActionListener(
+                e -> showPanel(new TransactionPanel(transactionService))
+        );        
+        
         budgetsButton.addActionListener(e -> showPanel(new BudgetPanel()));
         reportsButton.addActionListener(e -> showPanel(new ReportPanel()));
         saveButton.addActionListener(e -> System.out.println("Save feature coming soon."));

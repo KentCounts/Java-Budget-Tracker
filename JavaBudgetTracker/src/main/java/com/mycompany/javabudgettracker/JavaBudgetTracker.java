@@ -39,7 +39,9 @@ public class JavaBudgetTracker {
             @Override
             public void run() {
 
-                MainWindow window = new MainWindow();
+                TransactionService transactionService = new TransactionService();
+
+                MainWindow window = new MainWindow(transactionService);
                 window.setVisible(true);
             }
         });
