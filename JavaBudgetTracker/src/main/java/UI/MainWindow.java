@@ -17,6 +17,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import Services.TransactionService;
+import Services.ReportService;
 
 
  public class MainWindow extends JFrame {
@@ -24,10 +25,16 @@ import Services.TransactionService;
     private JPanel contentPanel;
     
     private TransactionService transactionService;
+    private ReportService reportService;
 
-    public MainWindow(TransactionService transactionService) {
+    public MainWindow(
+            TransactionService transactionService,
+            ReportService reportService
+    ) {
 
         this.transactionService = transactionService;
+        this.reportService = reportService;
+        
         setTitle("Java Budget Tracker");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

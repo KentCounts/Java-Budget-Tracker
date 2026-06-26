@@ -40,8 +40,13 @@ public class JavaBudgetTracker {
             public void run() {
 
                 TransactionService transactionService = new TransactionService();
+                ReportService reportService = new ReportService(transactionService);
 
-                MainWindow window = new MainWindow(transactionService);
+                MainWindow window = new MainWindow(
+                        transactionService,
+                        reportService
+                );
+
                 window.setVisible(true);
             }
         });
