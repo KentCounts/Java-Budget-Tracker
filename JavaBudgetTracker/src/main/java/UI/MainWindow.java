@@ -51,8 +51,8 @@ import Services.ReportService;
 
         contentPanel = new JPanel(new BorderLayout());
 
-        showPanel(new DashboardPanel());
-
+        showPanel(new DashboardPanel(reportService));
+        
         mainPanel.add(menuPanel, BorderLayout.WEST);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -70,8 +70,9 @@ import Services.ReportService;
         JButton saveButton = new JButton("Save");
         JButton exitButton = new JButton("Exit");
 
-        dashboardButton.addActionListener(e -> showPanel(new DashboardPanel()));
-        
+        dashboardButton.addActionListener(
+                e -> showPanel(new DashboardPanel(reportService))
+        );        
         transactionsButton.addActionListener(
                 e -> showPanel(new TransactionPanel(transactionService))
         );        
