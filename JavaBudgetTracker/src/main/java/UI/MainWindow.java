@@ -24,6 +24,11 @@ import Services.ReportService;
 
     private JPanel contentPanel;
     
+    private DashboardPanel dashboardPanel;
+    private TransactionPanel transactionPanel;
+    private BudgetPanel budgetPanel;
+    private ReportPanel reportPanel;
+    
     private TransactionService transactionService;
     private ReportService reportService;
 
@@ -34,12 +39,13 @@ import Services.ReportService;
 
         this.transactionService = transactionService;
         this.reportService = reportService;
-        
+
         setTitle("Java Budget Tracker");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        initializePanels();
         setupLayout();
     }
 
@@ -51,7 +57,7 @@ import Services.ReportService;
 
         contentPanel = new JPanel(new BorderLayout());
 
-        showPanel(new DashboardPanel(reportService));
+        showPanel(dashboardPanel);
         
         mainPanel.add(menuPanel, BorderLayout.WEST);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
@@ -70,15 +76,11 @@ import Services.ReportService;
         JButton saveButton = new JButton("Save");
         JButton exitButton = new JButton("Exit");
 
-        dashboardButton.addActionListener(
-                e -> showPanel(new DashboardPanel(reportService))
-        );        
-        transactionsButton.addActionListener(
-                e -> showPanel(new TransactionPanel(transactionService))
-        );        
+        dashboardButton.addActionListener(e -> showPanel(dashboardPanel));
+        transactionsButton.addActionListener(e -> showPanel(transactionPanel));
+        budgetsButton.addActionListener(e -> showPanel(budgetPanel));
+        reportsButton.addActionListener(e -> showPanel(reportPanel));
         
-        budgetsButton.addActionListener(e -> showPanel(new BudgetPanel()));
-        reportsButton.addActionListener(e -> showPanel(new ReportPanel()));
         saveButton.addActionListener(e -> System.out.println("Save feature coming soon."));
         exitButton.addActionListener(e -> System.exit(0));
 
@@ -99,4 +101,12 @@ import Services.ReportService;
         contentPanel.revalidate();
         contentPanel.repaint();
     }
+    
+    private void initializePanels() {
+
+    dashboardPanel = new DashboardPanel(reportService);
+    transactionPanel = new TransactionPanel(transactionService);
+    budgetPanel = new BudgetPanel();
+    reportPanel = new ReportPanel();
+}
 }
