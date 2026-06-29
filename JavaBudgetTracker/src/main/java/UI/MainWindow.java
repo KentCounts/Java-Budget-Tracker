@@ -15,9 +15,11 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import javax.swing.JOptionPane;
 
 import Services.TransactionService;
 import Services.ReportService;
+import Storage.FileManager;
 
 
  public class MainWindow extends JFrame {
@@ -31,14 +33,17 @@ import Services.ReportService;
     
     private TransactionService transactionService;
     private ReportService reportService;
+    private FileManager fileManager;
 
     public MainWindow(
             TransactionService transactionService,
-            ReportService reportService
+            ReportService reportService,
+            FileManager fileManager
     ) {
 
         this.transactionService = transactionService;
         this.reportService = reportService;
+        this.fileManager = fileManager;
 
         setTitle("Java Budget Tracker");
         setSize(900, 600);
@@ -64,6 +69,18 @@ import Services.ReportService;
 
         add(mainPanel);
     }
+    
+    private void saveData() {
+
+    fileManager.saveTransactions(
+            transactionService.getTransactions()
+    );
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Data saved successfully."
+    );
+    }
 
     private JPanel createMenuPanel() {
 
@@ -81,7 +98,7 @@ import Services.ReportService;
         budgetsButton.addActionListener(e -> showPanel(budgetPanel));
         reportsButton.addActionListener(e -> showPanel(reportPanel));
         
-        saveButton.addActionListener(e -> System.out.println("Save feature coming soon."));
+        saveButton.addActionListener(e -> saveData());
         exitButton.addActionListener(e -> System.exit(0));
 
         menuPanel.add(dashboardButton);

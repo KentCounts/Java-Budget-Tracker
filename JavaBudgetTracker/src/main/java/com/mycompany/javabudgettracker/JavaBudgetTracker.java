@@ -41,10 +41,13 @@ public class JavaBudgetTracker {
 
                 TransactionService transactionService = new TransactionService();
                 ReportService reportService = new ReportService(transactionService);
+                FileManager fileManager = new FileManager();
+
 
                 MainWindow window = new MainWindow(
                         transactionService,
-                        reportService
+                        reportService,
+                        fileManager
                 );
 
                 window.setVisible(true);
