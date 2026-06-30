@@ -32,28 +32,39 @@ import javax.swing.SwingUtilities;
 // Utils / Currency convert, Date, Validation
 
 public class JavaBudgetTracker {
-    
+
     public static void main(String[] args) {
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
+        SwingUtilities.invokeLater(() -> {
 
-                TransactionService transactionService = new TransactionService();
-                ReportService reportService = new ReportService(transactionService);
-                FileManager fileManager = new FileManager();
+            FileManager fileManager = new FileManager();
 
+            fileManager.ensureDataFilesExist();
 
-                MainWindow window = new MainWindow(
-                        transactionService,
-                        reportService,
-                        fileManager
-                );
+            TransactionService transactionService = new TransactionService();
 
-                window.setVisible(true);
+            ArrayList<TransactionModel> loadedTransactions =
+                    fileManager.loadTransactions();
+
+            for (TransactionModel transaction : loadedTransactions) {
+
+                transactionService.addTransaction(transaction);
             }
+
+            ReportService reportService =
+                    new ReportService(transactionService);
+
+            MainWindow window =
+                    new MainWindow(
+                            transactionService,
+                            reportService,
+                            fileManager
+                    );
+
+            window.setVisible(true);
         });
     }
+}
     
     // main():
     //     initialize
@@ -90,4 +101,3 @@ public class JavaBudgetTracker {
     // cloud sync
     // user accounts
     // encryption/security
-}
