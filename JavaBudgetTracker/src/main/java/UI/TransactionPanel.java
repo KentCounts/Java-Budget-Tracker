@@ -25,6 +25,7 @@ public class TransactionPanel extends JPanel {
     private JTextField categoryField;
     private JTextField descriptionField;
     private JTextField dateField;
+    private JTextField deleteIdField;
     private JComboBox<TransactionType> typeBox;
     private JTextArea transactionDisplay;
 
@@ -42,17 +43,20 @@ public class TransactionPanel extends JPanel {
 
     private void setupForm() {
 
-        JPanel formPanel = new JPanel(new GridLayout(6, 2));
+        JPanel formPanel = new JPanel(new GridLayout(8, 2));
 
         amountField = new JTextField();
         categoryField = new JTextField();
         descriptionField = new JTextField();
         dateField = new JTextField("2026-06-20");
         typeBox = new JComboBox<>(TransactionType.values());
+        deleteIdField = new JTextField();
 
         JButton addButton = new JButton("Add Transaction");
+        JButton deleteButton = new JButton("Delete Transaction");
 
         addButton.addActionListener(e -> addTransaction());
+        deleteButton.addActionListener(e -> deleteTransaction());
 
         formPanel.add(new JLabel("Amount:"));
         formPanel.add(amountField);
@@ -71,6 +75,12 @@ public class TransactionPanel extends JPanel {
 
         formPanel.add(new JLabel(""));
         formPanel.add(addButton);
+        
+        formPanel.add(new JLabel("Delete Transaction ID:"));
+        formPanel.add(deleteIdField);
+
+        formPanel.add(new JLabel(""));
+        formPanel.add(deleteButton);
 
         add(formPanel, BorderLayout.NORTH);
     }
@@ -121,6 +131,44 @@ public class TransactionPanel extends JPanel {
         }
     }
 
+    private void deleteTransaction() {
+
+    try {
+
+        int id = Integer.parseInt(deleteIdField.getText());
+
+        boolean removed = transactionService.removeTransactionById(id);
+
+        if (removed) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Transaction deleted successfully."
+            );
+
+            deleteIdField.setText("");
+            refreshTransactionDisplay();
+
+        } else {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Transaction ID not found.",
+                    "Delete Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+
+    } catch (NumberFormatException e) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please enter a valid transaction ID.",
+                "Input Error",
+                JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
     private void refreshTransactionDisplay() {
 
         transactionDisplay.setText("");
