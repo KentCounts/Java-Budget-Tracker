@@ -43,7 +43,7 @@ public class TransactionPanel extends JPanel {
 
     private void setupForm() {
 
-        JPanel formPanel = new JPanel(new GridLayout(8, 2));
+        JPanel formPanel = new JPanel(new GridLayout(9, 2));
 
         amountField = new JTextField();
         categoryField = new JTextField();
@@ -54,9 +54,11 @@ public class TransactionPanel extends JPanel {
 
         JButton addButton = new JButton("Add Transaction");
         JButton deleteButton = new JButton("Delete Transaction");
+        JButton clearButton = new JButton("Clear Transactions");
 
         addButton.addActionListener(e -> addTransaction());
         deleteButton.addActionListener(e -> deleteTransaction());
+        clearButton.addActionListener(e -> clearTransactions());
 
         formPanel.add(new JLabel("Amount:"));
         formPanel.add(amountField);
@@ -81,6 +83,9 @@ public class TransactionPanel extends JPanel {
 
         formPanel.add(new JLabel(""));
         formPanel.add(deleteButton);
+        
+        formPanel.add(new JLabel(""));
+    formPanel.add(clearButton);
 
         add(formPanel, BorderLayout.NORTH);
     }
@@ -166,6 +171,28 @@ public class TransactionPanel extends JPanel {
                 "Please enter a valid transaction ID.",
                 "Input Error",
                 JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+    
+    private void clearTransactions() {
+
+    int result = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete all transactions?",
+            "Confirm Clear",
+            JOptionPane.YES_NO_OPTION
+    );
+
+    if (result == JOptionPane.YES_OPTION) {
+
+        transactionService.clearTransactions();
+
+        refreshTransactionDisplay();
+
+        JOptionPane.showMessageDialog(
+                this,
+                "All transactions cleared."
         );
     }
 }
