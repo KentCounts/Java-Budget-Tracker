@@ -14,6 +14,7 @@ import Models.TransactionModel;
 import Services.TransactionService;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
 
@@ -25,10 +26,10 @@ public class TransactionPanel extends JPanel {
     private JTextField categoryField;
     private JTextField descriptionField;
     private JTextField dateField;
-    private JTextField deleteIdField;
     private JComboBox<TransactionType> typeBox;
-    private JTextArea transactionDisplay;
-
+    private JTable transactionTable;
+    private DefaultTableModel tableModel;
+    
     public TransactionPanel(TransactionService transactionService) {
 
         this.transactionService = transactionService;
@@ -43,14 +44,13 @@ public class TransactionPanel extends JPanel {
 
     private void setupForm() {
 
-        JPanel formPanel = new JPanel(new GridLayout(9, 2));
+        JPanel formPanel = new JPanel(new GridLayout(8, 2));
 
         amountField = new JTextField();
         categoryField = new JTextField();
         descriptionField = new JTextField();
         dateField = new JTextField("2026-06-20");
         typeBox = new JComboBox<>(TransactionType.values());
-        deleteIdField = new JTextField();
 
         JButton addButton = new JButton("Add Transaction");
         JButton deleteButton = new JButton("Delete Transaction");
@@ -77,9 +77,6 @@ public class TransactionPanel extends JPanel {
 
         formPanel.add(new JLabel(""));
         formPanel.add(addButton);
-        
-        formPanel.add(new JLabel("Delete Transaction ID:"));
-        formPanel.add(deleteIdField);
 
         formPanel.add(new JLabel(""));
         formPanel.add(deleteButton);
@@ -92,10 +89,20 @@ public class TransactionPanel extends JPanel {
 
     private void setupDisplay() {
 
-        transactionDisplay = new JTextArea();
-        transactionDisplay.setEditable(false);
+        String[] columns = {
+                "ID",
+                "Amount",
+                "Category",
+                "Description",
+                "Date",
+                "Type"
+        };
 
-        JScrollPane scrollPane = new JScrollPane(transactionDisplay);
+        tableModel = new DefaultTableModel(columns, 0);
+
+        transactionTable = new JTable(tableModel);
+
+        JScrollPane scrollPane = new JScrollPane(transactionTable);
 
         add(scrollPane, BorderLayout.CENTER);
     }
@@ -138,42 +145,34 @@ public class TransactionPanel extends JPanel {
 
     private void deleteTransaction() {
 
-    try {
+        int selectedRow = transactionTable.getSelectedRow();
 
-        int id = Integer.parseInt(deleteIdField.getText());
+        if (selectedRow == -1) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Please select a transaction to delete.",
+                    "Delete Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+
+            return;
+        }
+
+        int id = (int) tableModel.getValueAt(selectedRow, 0);
 
         boolean removed = transactionService.removeTransactionById(id);
 
         if (removed) {
 
+            refreshTransactionDisplay();
+
             JOptionPane.showMessageDialog(
                     this,
                     "Transaction deleted successfully."
             );
-
-            deleteIdField.setText("");
-            refreshTransactionDisplay();
-
-        } else {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Transaction ID not found.",
-                    "Delete Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
         }
-
-    } catch (NumberFormatException e) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Please enter a valid transaction ID.",
-                "Input Error",
-                JOptionPane.ERROR_MESSAGE
-        );
     }
-}
     
     private void clearTransactions() {
 
@@ -196,15 +195,25 @@ public class TransactionPanel extends JPanel {
         );
     }
 }
+    
     private void refreshTransactionDisplay() {
 
-        transactionDisplay.setText("");
+       tableModel.setRowCount(0);
 
-        for (TransactionModel transaction : transactionService.getTransactions()) {
+       for (TransactionModel transaction : transactionService.getTransactions()) {
 
-            transactionDisplay.append(transaction.toString() + "\n");
-        }
-    }
+           Object[] row = {
+                   transaction.getId(),
+                   transaction.getAmount(),
+                   transaction.getCategory(),
+                   transaction.getDescription(),
+                   transaction.getDate(),
+                   transaction.getType()
+           };
+
+           tableModel.addRow(row);
+       }
+   }
 
     private void clearFields() {
 
