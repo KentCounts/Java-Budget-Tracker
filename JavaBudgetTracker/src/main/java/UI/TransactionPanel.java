@@ -12,6 +12,7 @@ package UI;
 import Enums.TransactionType;
 import Models.TransactionModel;
 import Services.TransactionService;
+import Storage.FileManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 public class TransactionPanel extends JPanel {
 
     private TransactionService transactionService;
+    private FileManager fileManager;
 
     private JTextField amountField;
     private JTextField categoryField;
@@ -30,7 +32,13 @@ public class TransactionPanel extends JPanel {
     private JTable transactionTable;
     private DefaultTableModel tableModel;
     
-    public TransactionPanel(TransactionService transactionService) {
+    public TransactionPanel(
+            TransactionService transactionService,
+            FileManager fileManager
+    ) {
+
+        this.transactionService = transactionService;
+        this.fileManager = fileManager;
 
         this.transactionService = transactionService;
 
@@ -41,6 +49,13 @@ public class TransactionPanel extends JPanel {
 
         refreshTransactionDisplay();
     }
+    
+    private void saveTransactions() {
+
+    fileManager.saveTransactions(
+            transactionService.getTransactions()
+    );
+}
 
     private void setupForm() {
 
@@ -131,6 +146,7 @@ public class TransactionPanel extends JPanel {
 
             clearFields();
             refreshTransactionDisplay();
+            saveTransactions();
 
         } catch (Exception e) {
 
@@ -166,6 +182,7 @@ public class TransactionPanel extends JPanel {
         if (removed) {
 
             refreshTransactionDisplay();
+            saveTransactions();
 
             JOptionPane.showMessageDialog(
                     this,
@@ -188,6 +205,7 @@ public class TransactionPanel extends JPanel {
         transactionService.clearTransactions();
 
         refreshTransactionDisplay();
+        saveTransactions();
 
         JOptionPane.showMessageDialog(
                 this,

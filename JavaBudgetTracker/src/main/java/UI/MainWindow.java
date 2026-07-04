@@ -122,7 +122,10 @@ import Storage.FileManager;
     private void initializePanels() {
 
     dashboardPanel = new DashboardPanel(reportService);
-    transactionPanel = new TransactionPanel(transactionService);
+    transactionPanel = new TransactionPanel(
+            transactionService,
+            fileManager
+    );    
     budgetPanel = new BudgetPanel();
     reportPanel = new ReportPanel();
 }
