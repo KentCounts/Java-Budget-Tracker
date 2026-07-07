@@ -19,6 +19,8 @@ import Services.ReportService;
 import Services.TransactionService;
 import Storage.FileManager;
 import UI.MainWindow;
+import Services.BudgetService;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class JavaBudgetTracker {
             fileManager.ensureDataFilesExist();
 
             TransactionService transactionService = new TransactionService();
+            
+            BudgetService budgetService = new BudgetService();
 
             ArrayList<TransactionModel> loadedTransactions =
                     fileManager.loadTransactions();
@@ -49,6 +53,14 @@ public class JavaBudgetTracker {
             for (TransactionModel transaction : loadedTransactions) {
 
                 transactionService.addTransaction(transaction);
+            }
+            
+            ArrayList<BudgetModel> loadedBudgets =
+                    fileManager.loadBudgets();
+
+            for (BudgetModel budget : loadedBudgets) {
+
+                budgetService.addBudget(budget);
             }
 
             ReportService reportService =
@@ -58,6 +70,7 @@ public class JavaBudgetTracker {
                     new MainWindow(
                             transactionService,
                             reportService,
+                            budgetService,
                             fileManager
                     );
 

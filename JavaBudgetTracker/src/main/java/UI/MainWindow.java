@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import Services.TransactionService;
 import Services.ReportService;
 import Storage.FileManager;
+import Services.BudgetService;
 
 
  public class MainWindow extends JFrame {
@@ -34,16 +35,19 @@ import Storage.FileManager;
     private TransactionService transactionService;
     private ReportService reportService;
     private FileManager fileManager;
+    private BudgetService budgetService;
 
     public MainWindow(
             TransactionService transactionService,
             ReportService reportService,
+            BudgetService budgetService,
             FileManager fileManager
     ) {
 
         this.transactionService = transactionService;
         this.reportService = reportService;
         this.fileManager = fileManager;
+        this.budgetService = budgetService;
 
         setTitle("Java Budget Tracker");
         setSize(900, 600);
@@ -126,7 +130,11 @@ import Storage.FileManager;
             transactionService,
             fileManager
     );    
-    budgetPanel = new BudgetPanel();
+    
+    budgetPanel = new BudgetPanel(
+        budgetService,
+        fileManager
+    );
     reportPanel = new ReportPanel();
 }
 }

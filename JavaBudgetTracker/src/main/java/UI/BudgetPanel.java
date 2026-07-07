@@ -13,9 +13,22 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
-public class BudgetPanel extends JPanel {
+import Services.BudgetService;
+import Storage.FileManager;
 
-    public BudgetPanel() {
+public class BudgetPanel extends JPanel {
+    
+    private BudgetService budgetService;
+    private FileManager fileManager;
+
+    public BudgetPanel(
+        BudgetService budgetService,
+        FileManager fileManager
+    ) 
+    {
+        
+        this.budgetService = budgetService;
+        this.fileManager = fileManager;
 
         setLayout(new BorderLayout());
 
