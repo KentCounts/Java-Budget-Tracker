@@ -125,7 +125,10 @@ import Services.BudgetService;
     
     private void initializePanels() {
 
-    dashboardPanel = new DashboardPanel(reportService);
+    dashboardPanel = new DashboardPanel(
+        reportService,
+        budgetService
+);
     transactionPanel = new TransactionPanel(
             transactionService,
             fileManager
