@@ -138,6 +138,10 @@ import Services.BudgetService;
         budgetService,
         fileManager
     );
-    reportPanel = new ReportPanel();
+    
+    reportPanel = new ReportPanel(
+        reportService,
+        budgetService
+);
 }
 }

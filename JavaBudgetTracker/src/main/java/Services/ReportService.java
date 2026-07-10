@@ -262,7 +262,7 @@ public class ReportService {
 
     // STATISTICS
     // get highest expense transaction
-    public TransactionModel getHighestExpenseTransaction() {
+    public TransactionModel getHighestExpense() {
 
         TransactionModel highestExpense = null;
 
@@ -285,7 +285,7 @@ public class ReportService {
     }
 
     // get highest income transaction
-    public TransactionModel getHighestIncomeTransaction() {
+    public TransactionModel getHighestIncome() {
 
         TransactionModel highestIncome = null;
 
